@@ -16,6 +16,7 @@ export class Tab1Page implements OnInit{
   test = '';
 
   ngOnInit() {
+    //articles = [{"title": "test"}, {"title": "ttesst"}];
     this.articleService.getArticles().subscribe(res => {
       this.articles = res;
       this.test = this.articles[0].titre;

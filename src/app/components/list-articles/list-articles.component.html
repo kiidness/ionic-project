@@ -1,2 +1,3 @@
-<app-article *ngFor="let article of articles" (click)="ouvrirArticle(article)">   
+<app-article *ngFor="let article of articles" (click)="ouvrirArticle(article)"
+    [article]="article">   
 </app-article>

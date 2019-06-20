@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { Article } from 'src/app/services/articles.service';
 
 @Component({
   selector: 'app-list-articles',
@@ -6,14 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./list-articles.component.scss'],
 })
 export class ListArticlesComponent implements OnInit {
-
-  articles = [{"title": "test"}, {"title": "ttesst"}];
+  @Input() articles: Article[];
 
   constructor() { }
 
   ngOnInit() {}
 
-  ouvrirArticle(article) {
-    console.log(article + " sélectionné");
+  ouvrirArticle(article: Article) {
+    console.log(article.titre + " sélectionné");
   }
 }
