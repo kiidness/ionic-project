@@ -7,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListArticlesComponent implements OnInit {
 
+  articles = [{"title": "test"}, {"title": "ttesst"}];
+
   constructor() { }
 
   ngOnInit() {}
 
+  ouvrirArticle(article) {
+    console.log(article + " sélectionné");
+  }
 }
