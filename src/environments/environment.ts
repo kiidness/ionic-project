@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase: {
+    apiKey: 'AIzaSyDm_1wOiL2hVMZug2k7F5n2Q_C3zOwvyWc',
+    authDomain: 'leboncoin-a1741.firebaseapp.com',
+    databaseURL: 'https://leboncoin-a1741.firebaseio.com',
+    projectId: 'leboncoin-a1741',
+    storageBucket: 'leboncoin-a1741.appspot.com',
+    messagingSenderId: '792998652737',
+    appId: '1:792998652737:web:f4483920c4a4f12a'
+  }
 };
 
 /*
