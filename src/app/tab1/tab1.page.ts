@@ -13,15 +13,11 @@ export class Tab1Page implements OnInit{
   constructor(private articleService: ArticlesService) {}
 
   articles: Article[];
-  test = '';
 
   ngOnInit() {
-    //articles = [{"title": "test"}, {"title": "ttesst"}];
     this.articleService.getArticles().subscribe(res => {
       this.articles = res;
-      this.test = this.articles[0].titre;
     });
-
   }
 
   remove(item) {

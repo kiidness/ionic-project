@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{article.titre}}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-img [src]="article.image"></ion-img>
+  <ion-item>
+    <ion-icon name="logo-euro" slot="start"></ion-icon>
+    <ion-label>{{article.prix}}</ion-label>
+    <ion-button (click)="envoyerMail()">Contacter le vendeur</ion-button>
+  </ion-item>
+
+  
+
+  <h4>Description</h4>
+  <div>
+    {{article.description}}
+  </div>
+
+  
+      
+</ion-content>

@@ -5,9 +5,11 @@ import { map } from 'rxjs/operators';
 
 export interface Article {
   id?: string;
-  image: string;
-  prix: number;
   titre: string;
+  prix: number;
+  description: string;
+  image: string;
+  proprietaire: string;
 }
 
 @Injectable({
