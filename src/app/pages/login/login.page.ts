@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
 
   async loginUser(loginForm: FormGroup): Promise<void> {
     if (!loginForm.valid) {
-      console.log('Form is not valid yet, current value:', loginForm.value);
+      console.log('Formulaire non valide pour le moment, valeur:', loginForm.value);
     } else {
       this.loading = await this.loadingCtrl.create();
       await this.loading.present();
@@ -49,7 +49,7 @@ export class LoginPage implements OnInit {
             this.loading.dismiss().then(async () => {
               const alert = await this.alertCtrl.create({
                 message: error.message,
-                buttons: [{ text: 'Ok', role: 'cancel' }],
+                buttons: [{ text: 'Ok', role: 'Annuler' }],
               });
               await alert.present();
             });
