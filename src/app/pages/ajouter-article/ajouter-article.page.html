@@ -1,0 +1,71 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>AjouterArticle</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="articleForm">
+    <ion-item>
+      <ion-label position="stacked">Titre</ion-label>
+      <ion-input
+              formControlName="titre"
+              type="text"
+              placeholder="Titre"
+              [class.invalid]="!articleForm.controls['titre'].valid &&
+              articleForm.controls['titre'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!articleForm.controls['titre'].valid &&
+            articleForm.controls['titre'].touched"
+    >
+      <ion-label>Le titre de votre article doit faire plus de 3 caractères</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Prix</ion-label>
+      <ion-input
+              formControlName="prix"
+              type="number"
+              value=0
+              [class.invalid]="!articleForm.controls['prix'].valid &&
+              articleForm.controls['prix'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!articleForm.controls['prix'].valid &&
+            articleForm.controls['prix'].touched"
+    >
+      <ion-label>Le prix indiqué doit être supérieur à zéro.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Description</ion-label>
+      <ion-textarea
+              formControlName="description"
+              placeholder="Description de votre article"
+              [class.invalid]="!articleForm.controls['description'].valid&& articleForm.controls['description'].touched"
+      >
+      </ion-textarea>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!articleForm.controls['description'].valid
+      && articleForm.controls['description'].touched"
+    >
+      <ion-label>La description de votre article doit faire plus de 10 caractères.</ion-label>
+    </ion-item>
+
+    <ion-button (click)="creerAnnonce(articleForm)" expand="block" [disabled]="!articleForm.valid">
+      Créer l'annonce
+    </ion-button>
+    <ion-button expand="block" fill="clear" routerLink="/tabs/tab2">
+       Annuler
+    </ion-button>
+  </form>
+</ion-content>

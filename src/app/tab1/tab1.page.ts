@@ -15,13 +15,10 @@ export class Tab1Page implements OnInit{
   articles: Article[];
 
   ngOnInit() {
+    
     this.articleService.getArticles().subscribe(res => {
       this.articles = res;
     });
-  }
-
-  remove(item) {
-    this.articleService.removeArticle(item.id);
   }
 
 }

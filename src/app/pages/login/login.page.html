@@ -5,7 +5,6 @@
 </ion-header>
 
 <ion-content>
-  <ion-label>{{text}}</ion-label>
   <form [formGroup]="loginForm">
     <ion-item>
       <ion-label position="stacked">Email</ion-label>
@@ -49,11 +48,7 @@
     </ion-button>
   </form>
 
-  <ion-button (click)="createUser(loginForm)" expand="block" fill="clear" routerLink="/signup">
+  <ion-button expand="block" fill="clear" routerLink="/signin">
     Créer un nouveau compte
-  </ion-button>
-
-  <ion-button expand="block" fill="clear" routerLink="/reset-password">
-    J'ai oublié mon mot de passe
   </ion-button>
 </ion-content>

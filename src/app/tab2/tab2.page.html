@@ -7,9 +7,9 @@
 </ion-header>
 
 <ion-content>
-  <ion-fab>
-    <ion-fab-button>Button</ion-fab-button>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button routerLink="/ajouter-article">Ajouter un article</ion-fab-button>
   </ion-fab>
 
-  <app-list-articles></app-list-articles>
+  <app-list-articles [articles]="articles"></app-list-articles>
 </ion-content>

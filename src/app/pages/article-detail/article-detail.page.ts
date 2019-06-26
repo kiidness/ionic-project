@@ -19,7 +19,7 @@ export class ArticleDetailPage implements OnInit {
   }
 
   envoyerMail() {
-    console.log(this.article.proprietaire);
+    console.log(this.article.mailproprietaire);
   }
 
 }

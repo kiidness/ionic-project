@@ -29,6 +29,9 @@ export class LoginPage implements OnInit {
     });
   }
 
+  ngOnInit() {
+  }
+
   async loginUser(loginForm: FormGroup): Promise<void> {
     if (!loginForm.valid) {
       console.log('Formulaire non valide pour le moment, valeur:', loginForm.value);
@@ -50,38 +53,6 @@ export class LoginPage implements OnInit {
               const alert = await this.alertCtrl.create({
                 message: error.message,
                 buttons: [{ text: 'Ok', role: 'Annuler' }],
-              });
-              await alert.present();
-            });
-          }
-      );
-    }
-  }
-
-  ngOnInit() {
-  }
-
-  async createUser(loginForm: FormGroup) {
-    if (!loginForm.valid) {
-      console.log('Formulaire non valide pour le moment, valeur:', loginForm.value);
-    } else {
-      this.loading = await this.loadingCtrl.create();
-      await this.loading.present();
-
-      const email = loginForm.value.email;
-      const password = loginForm.value.password;
-
-      this.loginService.signupUser(email, password).then(
-          () => {
-            this.loading.dismiss().then(() => {
-              this.loginUser(loginForm);
-            });
-          },
-          error => {
-            this.loading.dismiss().then(async () => {
-              const alert = await this.alertCtrl.create({
-                message: error.message,
-                buttons: [{text: 'Ok', role: 'Annuler'}],
               });
               await alert.present();
             });

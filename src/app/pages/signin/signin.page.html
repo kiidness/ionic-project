@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Signin</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <form [formGroup]="signinForm">
+    <ion-item>
+      <ion-label position="stacked">Email</ion-label>
+      <ion-input
+              formControlName="email"
+              type="email"
+              placeholder="Votre email"
+              [class.invalid]="!signinForm.controls['email'].valid &&
+              signinForm.controls['email'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!signinForm.controls['email'].valid &&
+            signinForm.controls['email'].touched"
+    >
+      <ion-label>Merci de rentrer une adresse mail valide.</ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Mot de passe</ion-label>
+      <ion-input
+              formControlName="password"
+              type="password"
+              placeholder="Votre mot de passe"
+              [class.invalid]="!signinForm.controls['password'].valid&& signinForm.controls['password'].touched"
+      >
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Confirmation:</ion-label>
+      <ion-input
+              formControlName="password2"
+              type="password"
+              placeholder="Votre mot de passe"
+              [class.invalid]="!signinForm.controls['password2'].valid&& signinForm.controls['password2'].touched"
+      >
+      </ion-input>
+    </ion-item>
+    <ion-item
+            class="error-message"
+            *ngIf="!signinForm.controls['password'].valid
+      && signinForm.controls['password'].touched"
+    >
+    
+      <ion-label>Votre mot de passe doit faire plus de 6 caractères.</ion-label>
+    </ion-item>
+
+    <ion-button (click)="createUser(signinForm)" expand="block" [disabled]="!signinForm.valid">
+      Créer le compte
+    </ion-button>
+  </form>
+
+  <ion-button expand="block" fill="clear" routerLink="/login">
+    Annuler
+  </ion-button>
+</ion-content>

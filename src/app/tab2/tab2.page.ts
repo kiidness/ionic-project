@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { ArticlesService, Article } from '../services/articles.service';
+import { LoginService } from '../services/login.service';
 
 @Component({
   selector: 'app-tab2',
@@ -7,6 +9,14 @@ import { Component } from '@angular/core';
 })
 export class Tab2Page {
 
-  constructor() {}
+  constructor(private articleService: ArticlesService, private loginService: LoginService) { }
 
+  articles: Article[];
+
+  ngOnInit() {
+    var email = this.loginService.getUserLoggedEmail();
+    this.articleService.getArticlesFromMail().subscribe(res => {
+      this.articles = res
+    });
+  }
 }
