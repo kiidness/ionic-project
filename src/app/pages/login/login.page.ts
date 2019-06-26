@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {LoginService} from '../../services/login.service';
 import { FormGroup, Validators, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { LoadingController, AlertController } from '@ionic/angular';
@@ -61,4 +61,32 @@ export class LoginPage implements OnInit {
   ngOnInit() {
   }
 
+  async createUser(loginForm: FormGroup) {
+    if (!loginForm.valid) {
+      console.log('Formulaire non valide pour le moment, valeur:', loginForm.value);
+    } else {
+      this.loading = await this.loadingCtrl.create();
+      await this.loading.present();
+
+      const email = loginForm.value.email;
+      const password = loginForm.value.password;
+
+      this.loginService.signupUser(email, password).then(
+          () => {
+            this.loading.dismiss().then(() => {
+              this.loginUser(loginForm);
+            });
+          },
+          error => {
+            this.loading.dismiss().then(async () => {
+              const alert = await this.alertCtrl.create({
+                message: error.message,
+                buttons: [{text: 'Ok', role: 'Annuler'}],
+              });
+              await alert.present();
+            });
+          }
+      );
+    }
+  }
 }

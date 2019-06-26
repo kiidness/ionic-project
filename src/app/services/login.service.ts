@@ -30,4 +30,15 @@ export class LoginService {
         });
   }
 
+    logoutUser() {
+        return firebase.auth().signOut();
+    }
+
+    getUserLoggedEmail() {
+      if (firebase.auth().currentUser == null) {
+          return null;
+      }
+      return firebase.auth().currentUser.email;
+    }
+
 }
