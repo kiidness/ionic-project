@@ -16,6 +16,5 @@ export class ListArticlesComponent implements OnInit {
 
   ouvrirArticle(article: Article) {
     this.router.navigate(['article-detail'], { queryParams: { idArticle: article.id }});
-    console.log(article.titre + " sélectionné");
   }
 }

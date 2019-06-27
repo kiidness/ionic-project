@@ -43,12 +43,14 @@ export class AjouterArticlePage implements OnInit {
       this.loading = await this.loadingCtrl.create();
       await this.loading.present();
 
-      const article: Article;
-      article.titre = articleForm.value.titre,
-      article.description = articleForm.value.description,
-      article.prix = articleForm.value.prix,
-      article.mailproprietaire = this.loginService.getUserLoggedEmail()
-
+      var article: Article = {
+        titre: articleForm.value.titre,
+        description: articleForm.value.description,
+        prix: articleForm.value.prix,
+        mailproprietaire: this.loginService.getUserLoggedEmail(),
+        image: "https://image.but.fr/is/image/but/8605014760487_Q?$produit_niv3_l$"
+      };
+      
       this.articlesService.addArticle(article).then(
           () => {
             this.loading.dismiss().then(() => {

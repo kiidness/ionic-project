@@ -59,7 +59,11 @@ export class ArticlesService {
   }
 
   updateArticle(article: Article, id: string) {
-    return this.articlesCollection.doc(id).update(article);
+    console.log("TEST")
+    console.log(id)
+    console.log(article.description)
+    console.log(article.prix)
+    return this.articlesCollection.doc<Article>(id).update(article);
   }
 
   addArticle(article: Article) {
@@ -67,7 +71,15 @@ export class ArticlesService {
   }
 
   removeArticle(id) {
-    return this.articlesCollection.doc(id).delete();
+    return this.articlesCollection.doc<Article>(id).delete();
+  }
+
+  removeAllMyArticles() {
+    return this.mesArticles.forEach(articles => {
+      articles.forEach(article => {
+        this.removeArticle(article.id);
+      })
+    });
   }
 }
 

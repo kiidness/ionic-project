@@ -30,15 +30,19 @@ export class LoginService {
         });
   }
 
-    logoutUser() {
-        return firebase.auth().signOut();
-    }
+  logoutUser() {
+    return firebase.auth().signOut();
+  }
 
-    getUserLoggedEmail() {
-      if (firebase.auth().currentUser == null) {
-          return null;
-      }
-      return firebase.auth().currentUser.email;
-    }
+  getUserLoggedEmail() {
+    if (firebase.auth().currentUser == null) {
+      return null;
+     }
+    return firebase.auth().currentUser.email;
+  }
+
+  removeLoggedAccount() {
+    firebase.auth().currentUser.delete();
+  }
 
 }

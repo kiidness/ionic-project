@@ -8,17 +8,23 @@
   <ion-img [src]="article.image"></ion-img>
   <ion-item>
     <ion-icon name="logo-euro" slot="start"></ion-icon>
-    <ion-label>{{article.prix}}</ion-label>
-    <ion-button (click)="envoyerMail()">Contacter le vendeur</ion-button>
+    <ion-label *ngIf="!isMyArticle">{{article.prix}}</ion-label>
+    <ion-input *ngIf="isMyArticle" [(ngModel)]="article.prix"></ion-input>
+    <ion-button (click)="envoyerMail()" *ngIf="!isMyArticle">
+     Contacter le vendeur
+    </ion-button>
   </ion-item>
 
-  
-
   <h4>Description</h4>
-  <div>
+  <div *ngIf="!isMyArticle">
     {{article.description}}
   </div>
+  <ion-textarea *ngIf="isMyArticle" [(ngModel)]="article.description">
+  </ion-textarea>
 
-  
+  <app-save-and-delete-buttons *ngIf="isMyArticle"
+    (saveEvent)="save()" (removeEvent)="remove()">
+    
+  </app-save-and-delete-buttons>
       
 </ion-content>
