@@ -12,6 +12,7 @@ import { AppComponent } from './app.component';
 import { AngularFireModule } from 'angularfire2';
 import { environment } from '../environments/environment';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { EmailComposer } from '@ionic-native/email-composer/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -21,6 +22,7 @@ import { AngularFirestoreModule } from 'angularfire2/firestore';
     AngularFirestoreModule],
   providers: [
     StatusBar,
+    EmailComposer,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ],

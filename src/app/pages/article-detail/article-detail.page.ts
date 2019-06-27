@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { EmailComposer } from '@ionic-native/email-composer/ngx'
 import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { Article, ArticlesService } from 'src/app/services/articles.service';
 import { LoginService } from 'src/app/services/login.service';
@@ -16,7 +17,8 @@ export class ArticleDetailPage implements OnInit {
   loading: HTMLIonLoadingElement;
 
   constructor(private platform: Platform, private articleService: ArticlesService, private loginService: LoginService,
-    private alertCtrl: AlertController, private loadingCtrl: LoadingController, private router: Router) { }
+    private alertCtrl: AlertController, private loadingCtrl: LoadingController, private router: Router,
+    private emailComposer: EmailComposer) { }
 
   ngOnInit() {
     let id = this.platform.getQueryParam("idArticle");
@@ -25,13 +27,21 @@ export class ArticleDetailPage implements OnInit {
       this.article.id = id;
       let email = this.loginService.getUserLoggedEmail();
       this.isMyArticle = email == this.article.mailproprietaire;
-    });
-
-    
+    });  
   }
 
-  envoyerMail() {
-    console.log(this.article.mailproprietaire);
+  async envoyerMail() {
+    let mailperso = this.loginService.getUserLoggedEmail();
+    let email = {
+      to: this.article.mailproprietaire,
+      cc: null,
+      bcc: [mailperso],
+      attachments: null,
+      subject: "Réponse article leboncoin - " + this.article.titre,
+      body: "Bonjour,\nJe suis intéressé par votre article \"" + this.article.titre + "\".\nVoici mon mail: " + mailperso,
+      isHtml: true
+    }
+    this.emailComposer.open(email);
   }
 
   async save() {
@@ -50,25 +60,6 @@ export class ArticleDetailPage implements OnInit {
   }
 
   async remove() {
-    const alert = await this.alertCtrl.create({
-      message: 'Êtes vous sûr de vouloir supprimer définitivement cet article?',
-      buttons: [
-        {
-          text: 'Supprimer',
-          handler: () => {
-            this.removeConfirmed();
-          }
-        },
-        {
-          text: 'Annuler',
-          role: 'annuler'
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async removeConfirmed() {
     this.loading = await this.loadingCtrl.create();
     await this.loading.present();
     this.articleService.removeArticle(this.article.id);
