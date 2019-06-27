@@ -71,17 +71,17 @@ export class ArticleDetailPage implements OnInit {
 
   async updatePhoto() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
-      this.article.image = imageData;
       let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.article.image = base64Image;
      }, async (error) => {
       const alert = await this.alertCtrl.create({
-        message: "Erreur: la photo n'a pas pu être récupérée.\n " + error.message,
+        message: "Erreur: la photo n'a pas pu être récupérée.\n" + error.message,
         buttons: [{ text: 'Ok', role: 'Annuler' }],
       });
       await alert.present();

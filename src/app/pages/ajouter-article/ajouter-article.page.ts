@@ -74,14 +74,14 @@ export class AjouterArticlePage implements OnInit {
 
   async updatePhoto() {
     const options: CameraOptions = {
-      quality: 100,
-      destinationType: this.camera.DestinationType.FILE_URI,
+      quality: 50,
+      destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE
     }
     this.camera.getPicture(options).then((imageData) => {
-      this.image = imageData;
       let base64Image = 'data:image/jpeg;base64,' + imageData;
+      this.image = base64Image;
      }, async (error) => {
       const alert = await this.alertCtrl.create({
         message: "Erreur: la photo n'a pas pu être récupérée.\n" + error.message,
