@@ -6,6 +6,9 @@
 
 <ion-content>
   <ion-img [src]="article.image"></ion-img>
+  <ion-button expand="block" (click)="updatePhoto()" *ngIf="isMyArticle" >
+      Modifier la photo
+  </ion-button>
   <ion-item>
     <ion-icon name="logo-euro" slot="start"></ion-icon>
     <ion-label *ngIf="!isMyArticle">{{article.prix}}</ion-label>

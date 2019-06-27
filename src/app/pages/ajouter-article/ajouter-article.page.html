@@ -1,10 +1,14 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>AjouterArticle</ion-title>
+    <ion-title>Ajouter un article</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-img [src]="image"></ion-img>
+  <ion-button expand="block" (click)="updatePhoto()">
+    Prendre une photo
+  </ion-button>
   <form [formGroup]="articleForm">
     <ion-item>
       <ion-label position="stacked">Titre</ion-label>

@@ -4,6 +4,7 @@ import { Platform, AlertController, LoadingController } from '@ionic/angular';
 import { Article, ArticlesService } from 'src/app/services/articles.service';
 import { LoginService } from 'src/app/services/login.service';
 import { Router } from '@angular/router';
+import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 
 @Component({
   selector: 'app-article-detail',
@@ -18,7 +19,7 @@ export class ArticleDetailPage implements OnInit {
 
   constructor(private platform: Platform, private articleService: ArticlesService, private loginService: LoginService,
     private alertCtrl: AlertController, private loadingCtrl: LoadingController, private router: Router,
-    private emailComposer: EmailComposer) { }
+    private emailComposer: EmailComposer, private camera: Camera) { }
 
   ngOnInit() {
     let id = this.platform.getQueryParam("idArticle");
@@ -66,6 +67,25 @@ export class ArticleDetailPage implements OnInit {
     this.loading.dismiss().then(async => {
       this.router.navigate(['tabs/tab2']);
     })
+  }
+
+  async updatePhoto() {
+    const options: CameraOptions = {
+      quality: 100,
+      destinationType: this.camera.DestinationType.FILE_URI,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE
+    }
+    this.camera.getPicture(options).then((imageData) => {
+      this.article.image = imageData;
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+     }, async (error) => {
+      const alert = await this.alertCtrl.create({
+        message: "Erreur: la photo n'a pas pu être récupérée.\n " + error.message,
+        buttons: [{ text: 'Ok', role: 'Annuler' }],
+      });
+      await alert.present();
+     });
   }
 
 }
