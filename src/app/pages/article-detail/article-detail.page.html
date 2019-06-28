@@ -26,7 +26,7 @@
   </ion-textarea>
 
   <app-save-and-delete-buttons *ngIf="isMyArticle"
-    (saveEvent)="save()" (removeEvent)="remove()">
+    (saveEvent)="save()" (removeEvent)="remove()" slot="fixed">
     
   </app-save-and-delete-buttons>
       

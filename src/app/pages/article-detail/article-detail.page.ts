@@ -46,18 +46,24 @@ export class ArticleDetailPage implements OnInit {
   }
 
   async save() {
-    this.loading = await this.loadingCtrl.create();
-    await this.loading.present();
-    this.articleService.updateArticle(this.article, this.article.id);
-    this.loading.dismiss().then(async () => {
-      const alert = await this.alertCtrl.create({
-        message: 'Vos modifications ont bien étés mises à jour',
-        buttons: [
-          { text: 'Ok' }
-        ]
+    if (this.article.description.length < 10) {
+      this.showError("La description de votre article doit faire plus de 10 caractères.");
+    } else if (this.article.prix < 0) {
+      this.showError("Le prix de votre article doit être supérieur ou égal à zéro.");
+    } else {
+      this.loading = await this.loadingCtrl.create();
+      await this.loading.present();
+      this.articleService.updateArticle(this.article, this.article.id);
+      this.loading.dismiss().then(async () => {
+        const alert = await this.alertCtrl.create({
+          message: 'Vos modifications ont bien étés mises à jour',
+          buttons: [
+            { text: 'Ok' }
+          ]
+        });
+        await alert.present();
       });
-      await alert.present();
-    });
+    }
   }
 
   async remove() {
@@ -86,6 +92,14 @@ export class ArticleDetailPage implements OnInit {
       });
       await alert.present();
      });
+  }
+
+  async showError(error: string) {
+    const alert = await this.alertCtrl.create({
+      message: error,
+      buttons: [{ text: 'Ok', role: 'Annuler' }],
+    });
+    await alert.present();
   }
 
 }
